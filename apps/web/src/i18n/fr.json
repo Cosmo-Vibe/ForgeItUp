@@ -1,0 +1,74 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "continue": "Continuer",
+    "close": "Fermer"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "signOut": "Se déconnecter",
+    "email": "Email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "noAccount": "Pas encore de compte ?",
+    "alreadyHaveAccount": "Déjà un compte ?",
+    "createFreeAccount": "Créer un compte gratuit",
+    "continueWithGoogle": "Continuer avec Google",
+    "continueWithGitHub": "Continuer avec GitHub"
+  },
+  "builder": {
+    "title": "Créateur de Mods",
+    "platform": "Plateforme",
+    "type": "Type",
+    "version": "Version Minecraft",
+    "loader": "Mod Loader",
+    "modeName": {
+      "ai": "Mode IA",
+      "manual": "Manuel"
+    },
+    "prompt": "Décrivez votre mod",
+    "generate": "Générer le Mod",
+    "generating": "Génération en cours...",
+    "modId": "ID du Mod",
+    "modName": "Nom du Mod",
+    "author": "Auteur",
+    "description": "Description"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue",
+    "totalGenerations": "Total des Générations",
+    "thisMonth": "Ce Mois",
+    "upgradeToPro": "Passer à Pro",
+    "quickStart": "Démarrage rapide avec l'IA",
+    "clickPrompt": "Cliquez sur un prompt pour démarrer instantanément"
+  },
+  "billing": {
+    "title": "Facturation & Plans",
+    "currentPlan": "Plan Actuel",
+    "generationsUsed": "générations utilisées",
+    "upgradePlan": "Changer de Plan",
+    "manageSub": "Gérer l'Abonnement",
+    "monthly": "Mensuel",
+    "annual": "Annuel",
+    "free": "Gratuit",
+    "perMonth": "/mois",
+    "startFree": "Commencer Gratuitement",
+    "upgrade": "Passer à",
+    "popular": "Le Plus Populaire"
+  },
+  "errors": {
+    "invalidCredentials": "Email ou mot de passe incorrect",
+    "emailTaken": "Un compte avec cet email existe déjà",
+    "quotaExceeded": "Quota de génération dépassé. Veuillez mettre à niveau votre plan.",
+    "generationFailed": "Génération échouée. Veuillez réessayer.",
+    "networkError": "Erreur réseau. Veuillez vérifier votre connexion."
+  }
+}
