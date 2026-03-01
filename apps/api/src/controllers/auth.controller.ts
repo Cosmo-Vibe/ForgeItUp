@@ -89,7 +89,9 @@ export const authController = {
 
     const { data: user, error } = await supabaseAdmin
       .from('users')
-      .select('id, email, password_hash, display_name, avatar_url, subscription_tier')
+      .select(
+        'id, email, password_hash, display_name, avatar_url, subscription_tier, login_attempts, login_locked_until',
+      )
       .eq('email', email)
       .single();
 
@@ -98,11 +100,51 @@ export const authController = {
       return;
     }
 
-    const isValid = await bcrypt.compare(password, user.password_hash);
-    if (!isValid) {
-      errorResponse(res, 'Invalid email or password', 401);
+    // Check account lockout
+    if (user.login_locked_until && new Date(user.login_locked_until) > new Date()) {
+      const retryAfterSec = Math.ceil(
+        (new Date(user.login_locked_until).getTime() - Date.now()) / 1000,
+      );
+      res.setHeader('Retry-After', String(retryAfterSec));
+      errorResponse(
+        res,
+        `Account temporarily locked due to too many failed attempts. Try again in ${Math.ceil(retryAfterSec / 60)} minute(s).`,
+        429,
+      );
       return;
     }
+
+    const isValid = await bcrypt.compare(password, user.password_hash);
+
+    if (!isValid) {
+      const newAttempts = (user.login_attempts ?? 0) + 1;
+      const lockUntil = newAttempts >= 5 ? new Date(Date.now() + 15 * 60 * 1000) : null;
+
+      await supabaseAdmin
+        .from('users')
+        .update({
+          login_attempts: newAttempts,
+          ...(lockUntil ? { login_locked_until: lockUntil.toISOString() } : {}),
+        })
+        .eq('id', user.id);
+
+      if (lockUntil) {
+        errorResponse(
+          res,
+          'Too many failed attempts. Account locked for 15 minutes.',
+          429,
+        );
+      } else {
+        errorResponse(res, 'Invalid email or password', 401);
+      }
+      return;
+    }
+
+    // Successful login — reset lockout counters
+    await supabaseAdmin
+      .from('users')
+      .update({ login_attempts: 0, login_locked_until: null })
+      .eq('id', user.id);
 
     const token = generateToken(user.id, user.email);
 

@@ -28,7 +28,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       aiMode: true,
       exportFormats: ['.zip', '.jar'],
       priorityQueue: false,
-      apiAccess: false,
+      apiAccess: true,
     },
     features: [
       '20 generations per month',
@@ -36,6 +36,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       '.zip & .jar export',
       'All loaders & versions',
       'Generation history',
+      '1 API key',
       'Email support',
     ],
   },
@@ -48,7 +49,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       aiMode: true,
       exportFormats: ['.zip', '.jar', '.mcaddon', '.mcpack', '.json'],
       priorityQueue: true,
-      apiAccess: false,
+      apiAccess: true,
     },
     features: [
       '100 generations per month',
@@ -56,6 +57,7 @@ export const PRICING_PLANS: PricingPlan[] = [
       'All export formats',
       'Priority queue',
       'Fork & remix generations',
+      'Up to 3 API keys',
       'Priority support',
     ],
   },
@@ -84,8 +86,8 @@ export const PRICING_PLANS: PricingPlan[] = [
 ];
 
 export const PLAN_LIMITS = {
-  free: { generationsPerMonth: 1, rateLimit: 5 },
-  starter: { generationsPerMonth: 20, rateLimit: 20 },
-  pro: { generationsPerMonth: 100, rateLimit: 50 },
-  team: { generationsPerMonth: Infinity, rateLimit: 200 },
+  free: { generationsPerMonth: 1, rateLimit: 5, apiKeyLimit: 0 },
+  starter: { generationsPerMonth: 20, rateLimit: 20, apiKeyLimit: 1 },
+  pro: { generationsPerMonth: 100, rateLimit: 50, apiKeyLimit: 3 },
+  team: { generationsPerMonth: Infinity, rateLimit: 200, apiKeyLimit: 10 },
 };
